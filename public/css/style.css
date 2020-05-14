@@ -1,0 +1,35 @@
+body {
+    padding: 0;
+    background-color: cornsilk;
+    margin: 0 auto;
+    width: 50%;
+}
+
+h1 {
+    font-size: 64px;
+    /* padding: 0; */
+    margin-bottom: 15px;
+}
+
+.footer {
+    border-top: 1px solid grey;
+    padding: 20px;
+}
+
+
+a {
+    border: 1px solid black;
+    padding: 5px;
+    text-decoration: none;
+    background-color: floralwhite;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    background-color: rgba(255, 255, 255, 0.986);
+    color: black;
+    border-color: rgba(232, 233, 238, 0.884);
+}
