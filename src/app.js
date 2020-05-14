@@ -7,6 +7,7 @@ const { geoCode, geoLocation } = require("./utils/utils");
 
 // Express app, and path initialisation  
 const app = express();
+const port = process.env.PORT || 3000;
 const viewDirectory = path.join(__dirname,"../templates/view")
 const publicDirectory = path.join(__dirname, "../public");
 const partialDirectory = path.join(__dirname, "../templates/partials");
@@ -68,8 +69,8 @@ app.use((req, res) => {
 })
 
 // Server port forwarding 
-app.listen(3000, () => {
-    console.log(chalk.green("Server is up and running at port 3000!"));
+app.listen(port, () => {
+    console.log(chalk.green(`Server is up and running at port ${port}!`));
 });
 
 
