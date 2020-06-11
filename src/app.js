@@ -68,7 +68,8 @@ app.get("/weather", (req, res) => {
 
 app.post("/:status", (req, res) => {
     let status = false;
-    const device = new mqtt("mqtt://test.mosquitto.org");
+    const client = mqtt.connect("mqtt://broker.mqttdashboard.com");
+// const device = new mqtt("mqtt://test.mosquitto.org");
     if(req.params.status === "on"){
         status = true;
     } else if (req.params.status === "off"){

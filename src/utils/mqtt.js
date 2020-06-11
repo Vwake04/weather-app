@@ -9,6 +9,9 @@ class MQTT {
         this.client.subscribe(subscribeTopic);
         this.client.on("message", (topic, state) => {
             state = JSON.parse(state.toString());
+            if(state === 0){
+                return;
+            }
             this.client.unsubscribe(subscribeTopic);
             if(state.status === status){
                 console.log(`It's alread ${status}`);
