@@ -13,7 +13,7 @@ const geoCode = (address, callback) => {
             callback(error, {
                 lat: response.body.features[0].center[0],
                 lon: response.body.features[0].center[1],
-                placeName: response.body.features[0].place_name
+                placeName: response.body.features[0].place_name,
             });
         }
     });
@@ -30,7 +30,8 @@ const geoLocation = (lat, lon, callback) => {
             callback(undefined, {
                 lat: lat,
                 lon: lon,
-                name: response.body.location.region
+                name: response.body.location.region,
+                current: response.body.current
             });
         }
     });

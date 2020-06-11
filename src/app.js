@@ -4,6 +4,7 @@ const chalk = require("chalk");
 const path = require("path");
 const hbs = require("hbs");
 const { geoCode, geoLocation } = require("./utils/utils");
+const mqtt = require("./utils/mqtt");
 
 // Express app, and path initialisation  
 const app = express();
@@ -48,20 +49,35 @@ app.get("/weather", (req, res) => {
             }
 
             const { lat, lon } = response;
-
             geoLocation(lat, lon, (error, response) => {
-                const { lat, lon, name } = response;
+                const { lat, lon, name, current } = response;
                 if(error){
                    return res.send({error}); 
                 }
+                // console.log(current);
                 res.send({
                     Latitude: lat,
                     Longitude: lon,
-                    Name: name
+                    Name: name,
+                    current
                 });
             });
         });
     }
+});
+
+app.post("/:status", (req, res) => {
+    let status = false;
+    const device = new mqtt("mqtt://test.mosquitto.org");
+    if(req.params.status === "on"){
+        status = true;
+    } else if (req.params.status === "off"){
+        status = false;
+    }
+    device.changeState("light", "mobile", status);
+    res.status(201).send({
+        message: "Viola!"
+    });
 });
 
 app.use((req, res) => {
