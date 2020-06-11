@@ -70,12 +70,7 @@ app.post("/:status", (req, res) => {
     let status = false;
     const device = new mqtt("mqtt://broker.mqttdashboard.com");
 // const device = new mqtt("mqtt://test.mosquitto.org");
-    if(req.params.status === "on"){
-        status = true;
-    } else if (req.params.status === "off"){
-        status = false;
-    }
-    device.changeState("light", "mobile", status);
+    device.changeState("light", "mobile");
     res.status(201).send({
         message: "Viola!"
     });

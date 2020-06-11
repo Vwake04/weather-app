@@ -5,7 +5,7 @@ class MQTT {
         this.client = mqtt.connect(mqttURL);
     }
 
-    changeState(subscribeTopic, publishTopic, status){
+    changeState(subscribeTopic, publishTopic){
         this.client.subscribe(subscribeTopic);
         this.client.on("message", (topic, state) => {
             state = JSON.parse(state.toString());
@@ -13,11 +13,8 @@ class MQTT {
                 return;
             }
             this.client.unsubscribe(subscribeTopic);
-            if(state.status === status){
-                console.log(`It's alread ${status}`);
-                return;
-            }
-            // state.status = !state.status;
+            console.log(state)
+            state.status = !state.status;
             this.client.publish(publishTopic, JSON.stringify(state));
         });
     }
