@@ -5,7 +5,7 @@ class MQTT {
         this.client = mqtt.connect(mqttURL);
     }
 
-    changeState(subscribeTopic, publishTopic){
+    changeState(subscribeTopic, publishTopic, callback){
         this.client.subscribe(subscribeTopic);
         this.client.on("message", (topic, state) => {
             state = JSON.parse(state.toString());
@@ -13,9 +13,10 @@ class MQTT {
                 return;
             }
             this.client.unsubscribe(subscribeTopic);
-            console.log(state)
+            // console.log(state)
             state.status = !state.status;
             this.client.publish(publishTopic, JSON.stringify(state));
+            callback(state);
         });
     }
 

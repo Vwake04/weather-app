@@ -66,13 +66,10 @@ app.get("/weather", (req, res) => {
     }
 });
 
-app.post("/:status", (req, res) => {
-    let status = false;
-    const device = new mqtt("mqtt://broker.mqttdashboard.com");
-// const device = new mqtt("mqtt://test.mosquitto.org");
-    device.changeState("light", "mobile");
-    res.status(201).send({
-        message: "Viola!"
+app.get("/switch", (req, res) => {
+    const device = new mqtt('mqtt://broker.mqttdashboard.com');
+    device.changeState("light", "mobile", (state) => {
+        res.status(201).send(state);
     });
 });
 
